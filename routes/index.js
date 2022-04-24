@@ -17,7 +17,6 @@ const ipfs = create('https://ipfs.infura.io:5001');
 const RequireGithubLogin = (req, res, next) => {
   if(!req.session.github)
     return res.redirect('/');
-  req.session.github.login = "vaibhavchellani";
   next();
 }
 
@@ -90,7 +89,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/profile', RequireGithubLogin, (req, res) => {
   console.log(req.session.github);
-  res.render('profile', { username : "madhavanmalolan" });
+  res.render('profile', { username : req.session.github.login });
 });
 
 router.get('/api-login-text', async (req, res) => {
@@ -201,7 +200,7 @@ router.get('/u/:username', async(req, res) => {
     console.log(profile);
     const publications = await PostModel.find({ username: profile.id });
     if(publications.length > 0)
-      return res.render('user', {post: JSON.parse(publications[0].contentURI), username: "madhavanmalolan"});
+      return res.render('user', {post: JSON.parse(publications[0].contentURI), username: req.session.github.login});
   }
   res.render('error');
   
