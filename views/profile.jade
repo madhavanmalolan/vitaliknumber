@@ -1,0 +1,37 @@
+extends layout
+
+block content
+
+  script(src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript")
+  script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js")
+  script(src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous")
+  center(style="height: 100%")
+    img(style="height: 200px" src="https://cdn.dribbble.com/users/5201004/screenshots/15802286/media/b2a54a1a140074434a505f61767e3233.png?compress=1&resize=1200x900&vertical=top")
+    .primary(style="height: calc(100% - 80px)")
+      h1 CONNECT WALLET
+      p(style="max-width: 500px") Your Vitalik Number will be stored on chain using Lens Protocol
+      br
+      br
+      button#button(onclick="sign()") CONNECT &amp; CALCULATE NUMBER 
+      a#redirect(href="/u/#{username}") VIEW NUMBER 
+      p#info Calculating might take a few minutes
+  script.
+    $("document").ready(() => {
+      $("#info").hide();
+      $("#redirect").hide();
+    })
+    async function sign() {
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const address = await signer.getAddress();
+      const text= await axios.get('/api-login-text?address='+address);
+      const signature = await signer.signMessage(text.data);
+      $("#info").show();
+      $("#redirect").show();
+      $("#button").hide();
+
+      const data = await axios.post('/calculate', { address, signature })
+      console.log(data);
+
+    }

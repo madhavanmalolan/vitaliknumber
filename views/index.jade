@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  center(style="height: 100%")
+    img(style="height: 200px" src="https://cdn.dribbble.com/users/5201004/screenshots/15802286/media/b2a54a1a140074434a505f61767e3233.png?compress=1&resize=1200x900&vertical=top")
+    .primary(style="height: calc(100% - 80px)")
+      h1 VITALIK NUMBER
+      p(style="max-width: 500px") Erdos number but for Vitalik. 
+      br
+      p(style="max-width: 500px") If you have contributed to the same github repo as Vitalik, your Vitalik Number is 1. If Alice &amp; Bob have collaborated on a github repo and Bob &amp; Vitalik have collaborated on another repo, Alice's Vitalik Number is 2.
+      br
+      br
+      a(href="/oauth-any/github/login?state=/profile" style="margin-top: 80px") LOGIN WITH GITHUB

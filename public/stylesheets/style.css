@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.primary {
+  padding: 30px;
+  background-color: #B6F72B;
+}
+
+a{
+  background-color: antiquewhite;
+  padding: 10px 20px 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;  
+}
+
+button{
+  background-color: antiquewhite;
+  padding: 10px 20px 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;  
+  border: none;
+  cursor: pointer;
+}
+
